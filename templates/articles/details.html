@@ -1,0 +1,32 @@
+{% extends 'articles/base.html' %}
+
+
+{% block title %}{{article.article_title}}{% endblock %}
+{% block content %}
+<h2>{{article.article_title}}</h2>
+<h2>{{article.article_text}}</h2>
+<h2>{{article.pub_date}}</h2>
+
+{% if latest_comment_list %}
+yo
+{% for a in latest_comment_list  %}
+<p>
+    <strong>{{a.comment_author}}</strong>
+<p>a.comment_text</p>
+</p>
+{% endfor %}
+{% else %}
+No comments
+{% endif %}
+<form action="{% url 'articles:leave_comment' article.id %}" method="POST">
+
+    {% csrf_token %}
+    <input type="text" required placeholder="Ваше имя" name="name"></br>
+    <textarea name="text" required="" placeholder="comment" cols="30" rows="10"></textarea></br>
+    <button type="submit">Comment</button></form>
+
+
+
+
+
+{% endblock %}
